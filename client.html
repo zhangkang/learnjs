@@ -1,0 +1,54 @@
+<!--
+ * @Author: ZhangKang
+ * @Date: 2021-04-28 20:52:03
+ * @LastEditTime: 2021-04-28 21:02:39
+ * @FilePath: \nwjs\client.html
+ * @Description: 
+ * @Copyright: © 2021, SteelHome. All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易聊天</title>
+</head>
+<body>
+    <h1>Websocket 简易聊天</h1>
+    <div id="app">
+        <input type="text" id="sendMsg"/>
+        <button id="submitBtn">发送</button>
+    </div>
+</body>
+<script type="text/javascript">
+    //在页面显示聊天内容
+    function showMessage(str,type){
+        var div =document.createElement("div");
+        div.innerHTML=str;
+        if(type=="enter"){
+            div.style.color="blue";
+        } else if (type="leave"){
+            div.style.color="red";
+        }
+        document.body.appendChild(div);
+    }
+    var websocket=new WebSocket("ws://182.254.157.182:8001");
+    websocket.onopen=function(){
+        console.log("已经连上服务器----");
+        document.getElementById("submitBtn").onclick=function(){
+            var txt=document.getElementById("sendMsg").value;
+            if(txt){
+                websocket.send(txt);
+            }
+        };
+    };
+    websocket.onclose=function(){
+        console.log("websocket close");
+    };
+    websocket.onmessage=function(e){
+        var mes=JSON.parse(e.data);
+        showMessage(mes.data,mes.type);
+    };
+</script>
+</html>
