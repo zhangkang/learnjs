@@ -1,0 +1,41 @@
+<!--
+ * @Author: ZhangKang
+ * @Date: 2021-04-30 22:45:59
+ * @LastEditTime: 2021-04-30 23:02:24
+ * @FilePath: \learnjs\promise.html
+ * @Description: 
+ * @Copyright: © 2021, learnjs. All rights reserved.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+<script>
+    function taskA(){
+        console.log("Task A");
+        throw new Error("taska error");
+    }
+    function taskB(){
+        console.log("Task B");
+        throw new Error("taskb error");
+    }
+    function onRejected(error){
+        console.log("onRejected catch Error"+error);
+    }
+    function finalTask(){
+        console.log("Final Task");
+    }
+    var promise=Promise.resolve();
+    promise.then(taskA)
+    .then(taskB)
+    .catch(onRejected)
+    .then(finalTask);
+console.log('promise finish');
+</script>    
+</body>
+</html>

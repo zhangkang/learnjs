@@ -4,7 +4,7 @@
  * @LastEditTime: 2021-04-28 21:14:45
  * @FilePath: \nwjs\main.js
  * @Description: 
- * @Copyright: © 2021, SteelHome. All rights reserved.
+ * @Copyright: © 2021, learnjs. All rights reserved.
  */
 var ws=require("nodejs-websocket")
 var port =8001;
